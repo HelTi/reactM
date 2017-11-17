@@ -6,6 +6,11 @@ var utils = require('./utils');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+function resolve(dir) {
+    return path.join(__dirname, '.', dir)
+}
+
 module.exports = {
     devtool: '#source-map',
     entry: './src/index.js',
@@ -19,11 +24,8 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
-                query: {
-                    presets: ['es2015', 'react']
-                }
+                include: [resolve('src'), resolve('test')]
             },
             {
                 test: /\.css$/,
